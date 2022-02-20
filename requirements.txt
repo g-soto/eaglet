@@ -1,0 +1,12 @@
+aiosqlite
+greenlet
+pip
+pyaes
+pyasn1
+PyYAML
+rsa
+setuptools
+SQLAlchemy
+Telethon
+typing-extensions
+wheel
