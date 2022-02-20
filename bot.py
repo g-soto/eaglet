@@ -30,7 +30,7 @@ class Eaglet:
                 await event.respond(f"**Welcome to {(await event.get_chat()).title}**\n"
                                     f"\n"
                                     f"There is some rules:\n"
-                                    f"1. Leave Xhitz alone😌")
+                                    f"1. Leave [Xhitz](tg://user?id=604636308) alone😌")
             else:
                 await event.respond("🎵You know the rules and so do i.🎵")
 
