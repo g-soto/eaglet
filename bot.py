@@ -19,28 +19,18 @@ class Eaglet:
         await self.client.disconnect()
 
     async def start(self):
-        self.client.add_event_handler(self.new_message)
+        self.client.add_event_handler(self.new_action)
         await self.sql_engine.connect()
         await self.client.start(bot_token=self.token)
 
     @events.register(events.ChatAction())
-    async def new_message(self, event):
+    async def new_action(self, event):
         if isinstance(action := event.action_message.action, (MessageActionChatAddUser, MessageActionChatJoinedByLink)):
             if await self.sql_engine.exists_new_players(action.users):
-                await event.respond("**Welcome to Highnest Castle, new recruit.**\n"
-                                    "\n"
-                                    "Send here the pass that appears on your 🏅Me to earn your Royal Guard Cape!"
-                                    "(It should look something like this: FLY HIG)\n"
-                                    "\n"
-                                    "**Please register to @BotnestBot.**\n"
-                                    "Type /auth in @BotnestBot to get the code from your @chtwrsbot then forward the code "
-                                    "to @BotnestBot.\n"
-                                    "\n"
-                                    "When you reach lvl 5, go to @BotnestBot to "
-                                    "⚜️Squad⚜️-> ⚜️Join Squad -> Eaglet's Eyrie to join the new group and "
-                                    "receive orders there.\n"
-                                    "\n"
-                                    "Now Fly High, recruit!🦅")
+                await event.respond(f"**Welcome to {(await event.get_chat()).title}**\n"
+                                    f"\n"
+                                    f"There is some rules:\n"
+                                    f"1. Leave Xhitz alone😌")
             else:
                 await event.respond("🎵You know the rules and so do i.🎵")
 
