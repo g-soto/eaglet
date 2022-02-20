@@ -1,8 +1,11 @@
+import re
+
 import yaml
 from telethon.sync import TelegramClient, events
 from telethon.tl.types import MessageActionChatAddUser, MessageActionChatJoinedByLink
 
 from SQL import SQL
+
 
 class Eaglet:
     def __init__(self):
@@ -14,6 +17,8 @@ class Eaglet:
         self.token = settings["token"]
         self.sql_engine = SQL()
         self.run_until_disconnected = self.client.run_until_disconnected
+        self.pattern = re.compile(r"\[|\]")
+        self.escaped_bracket = '\\['
 
     async def disconnect(self):
         await self.client.disconnect()
@@ -27,10 +32,12 @@ class Eaglet:
     async def new_action(self, event):
         if isinstance(action := event.action_message.action, (MessageActionChatAddUser, MessageActionChatJoinedByLink)):
             if await self.sql_engine.exists_new_players(action.users):
-                await event.respond(f"**Welcome to {(await event.get_chat()).title}**\n"
-                                    f"\n"
-                                    f"There is some rules:\n"
-                                    f"1. Leave [Xhitz](@LCShotz) alone😌")
+                await event.respond(
+                    f"</b>Welcome to {(await event.get_chat()).title}</b>\n"
+                    f"\n"
+                    f"There is some rules:\n"
+                    f"<b>1.</b> Leave <a href='tg://user?id=604636308'>Xhitz</a> alone😌", parse_mode="html",
+                    silent=True)
             else:
                 await event.respond("🎵You know the rules and so do i.🎵")
 
