@@ -32,11 +32,13 @@ class Eaglet:
     async def new_action(self, event):
         if isinstance(action := event.action_message.action, (MessageActionChatAddUser, MessageActionChatJoinedByLink)):
             if await self.sql_engine.exists_new_players(action.users):
-                await event.respond(
+                await event.reply(
                     f"</b>Welcome to {(await event.get_chat()).title}</b>\n"
                     f"\n"
                     f"There is some rules:\n"
-                    f"<b>1.</b> Leave <a href='tg://user?id=604636308'>Xhitz</a> alone😌", parse_mode="html",
+                    f"<b>1.</b> Leave <a href='tg://user?id=604636308'>Xhitz</a> alone😌.\n"
+                    f"https://t.me/c/1253120625/926220🤬.",
+                    parse_mode="html",
                     silent=True)
             else:
                 await event.respond("🎵You know the rules and so do i.🎵")
