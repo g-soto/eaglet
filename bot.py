@@ -17,8 +17,6 @@ class Eaglet:
         self.token = settings["token"]
         self.sql_engine = SQL()
         self.run_until_disconnected = self.client.run_until_disconnected
-        self.pattern = re.compile(r"\[|\]")
-        self.escaped_bracket = '\\['
 
     async def disconnect(self):
         await self.client.disconnect()
@@ -36,8 +34,7 @@ class Eaglet:
                     f"</b>Welcome to {(await event.get_chat()).title}</b>\n"
                     f"\n"
                     f"There is some rules:\n"
-                    f"<b>1.</b> Leave <a href='tg://user?id=604636308'>Xhitz</a> alone😌.\n"
-                    f"https://t.me/c/1253120625/926220🤬.",
+                    f"<b>1.</b> Leave Xhitz alone😌.\n",
                     parse_mode="html",
                     silent=True)
             else:
