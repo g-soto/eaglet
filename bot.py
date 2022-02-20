@@ -1,5 +1,5 @@
 import yaml
-from telethon.sync import TelegramClient, events, errors
+from telethon.sync import TelegramClient, events
 from telethon.tl.types import MessageActionChatAddUser, MessageActionChatJoinedByLink
 
 from SQL import SQL
